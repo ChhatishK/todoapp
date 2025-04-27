@@ -24,7 +24,10 @@ export async function login(data, dispatch, navigate) {
     try {
         const response = await apiConnector("POST", LOGIN, data);
 
+        console.log("LOGIN_API", response);
+
         if (!response?.data?.success) {
+            // toast.error(response.data.message);
             throw new Error(response?.data?.message);
         }
 
@@ -41,13 +44,16 @@ export async function login(data, dispatch, navigate) {
             navigate('/client/view-todos');
         }
 
+        return true;
     } catch (error) {
         console.error("Login error:", error);
-        toast.error(error.message || "Login failed");
+        toast.error(error.response.data.message);
     } finally {
         dispatch(setLoading(false));
         toast.dismiss(toastId);
     }
+
+    return false;
 }
 
 export async function signup(data, dispatch, navigate) {
@@ -57,16 +63,19 @@ export async function signup(data, dispatch, navigate) {
     try {
         const response = await apiConnector("POST", SIGNUP, data);
 
+        console.log(response);
+
         if (!response?.data?.success) {
+            toast.error(response.data.message);
             throw new Error(response?.data?.message);
         }
 
         toast.success('Signup successful!');
-        navigate('/login');
+        // navigate('/login');
 
     } catch (error) {
         console.error("Signup error:", error);
-        toast.error(error.message || "Signup failed");
+        // toast.error(error?.response?.data.message);
     } finally {
         dispatch(setLoading(false));
         toast.dismiss(toastId);
@@ -83,6 +92,7 @@ export async function updateProfile(data, token, dispatch) {
         });
  
         if (!response.data.success) {
+            toast.error(response.data.message);
             throw new Error(response.data.message);
         }
 
@@ -92,7 +102,7 @@ export async function updateProfile(data, token, dispatch) {
 
     } catch (error) {
         console.error("Profile update error:", error);
-        toast.error(error.message || "Profile update failed");
+        // toast.error(error.response?.data?.message || "Profile update failed");
     } finally {
         dispatch(setLoading(false));
         toast.dismiss(toastId);

@@ -21,7 +21,7 @@ exports.signup = async (req, res) => {
         if (user) {
             return res.status(203).json({
                 success: false,
-                message: "User already exists."
+                message: "User already exists! Change email."
             })
         }
 
@@ -61,7 +61,7 @@ exports.login = async (req, res) => {
 
         const {email, password} = req.body;
 
-        console.log(req.body);
+        // console.log(req.body);
 
         if (!email || !password) {
             return res.status(404).json({
@@ -75,7 +75,7 @@ exports.login = async (req, res) => {
         if (!user) {
             return res.status(404).json({
                 success: false,
-                message: "User not registered."
+                message: "Wrong email or password."
             })
         }
 
