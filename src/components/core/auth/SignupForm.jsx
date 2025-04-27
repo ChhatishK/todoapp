@@ -30,7 +30,7 @@ function SignupForm() {
         }))
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
 
         if (!fullName || !email || !phoneNumber || !password || !role) {
@@ -40,7 +40,12 @@ function SignupForm() {
         
         formData.accountType = role;
 
-        signup(formData, dispatch, navigate);
+        const response = await signup(formData, dispatch, navigate);
+        console.log(response);
+
+        if (!response) {
+            return;
+        }
 
         setFormData({fullName: "", email: "", phoneNumber: "", password: ""})
     }

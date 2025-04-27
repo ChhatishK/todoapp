@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../../services/operations/authAPI';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function LoginForm() {
+
+    const {user} = useSelector((state) => state.auth);
 
     const [loginData, setLoginData] = useState({
         email: "",
@@ -34,6 +36,10 @@ function LoginForm() {
         }
 
         login(loginData, dispatch, navigate);
+
+        if (user === null) {
+            return;
+        }
 
         setLoginData({email: "", password: ""});
     }
