@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+.btn {
+    @apply px-5 py-2 rounded-lg bg-gray-800 transition-all duration-200 cursor-pointer border border-gray-400 hover:bg-gray-700 hover:border-gray-200
+}
+
+.heading {
+    @apply text-2xl text-gray-400 font-semibold
+}
+
+.list {
+    @apply list-disc px-6 text-neutral-400
+}
+
+.formStyle {
+    @apply flex flex-col gap-3
+}
+
+.inputStyle {
+    all: unset;
+    @apply px-3 p-2 border border-gray-600 rounded-lg
+}
