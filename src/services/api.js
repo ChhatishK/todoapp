@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:4000/api'
+const BASE_URL = 'https://todoapp-a16a.onrender.com/api'
 console.log(BASE_URL);
 
 // AUTH ENDPOINTS
